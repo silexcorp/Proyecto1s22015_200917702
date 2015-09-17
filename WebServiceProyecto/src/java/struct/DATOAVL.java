@@ -11,10 +11,13 @@ package struct;
  */
 public class DATOAVL {
     public int id;
+    public LISTADOBLE lista_turno;
     public DATOAVL(){
         this.id = 0;
+        this.lista_turno = null;
     }
     public DATOAVL(int id){
         this.id = id;
+        this.lista_turno = null;
     }
 }

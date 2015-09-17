@@ -57,3 +57,7 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+/WebApplicationClient/dist/
+/WebApplicationClientee/nbproject/private/
+/WebApplicationCliente/nbproject/private/
+/WebApplicationCliente/build/

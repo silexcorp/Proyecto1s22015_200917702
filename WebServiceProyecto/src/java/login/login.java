@@ -26,8 +26,10 @@ public class login {
         //TODO write your implementation code here:
         if(user.equals("admin")&&pass.equals("admin")){
             return "admin";
+        }else if(user.equals("user")&&pass.equals("user")){
+            return "user";
         }else{
-            return "guess";
+            return "guest";
         }
     }
 

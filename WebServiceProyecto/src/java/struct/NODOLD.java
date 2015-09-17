@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package arbol;
+package struct;
 
 /**
  *
@@ -13,6 +13,8 @@ public class NODOLD {
     protected DATOLD datos;
     protected NODOLD ant;
     protected NODOLD sig;
+    
+    
     
     public NODOLD(DATOLD datos){
         //super(datos);

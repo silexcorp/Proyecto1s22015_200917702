@@ -11,10 +11,14 @@ package struct;
  */
 public class DATOLD {
     public int id;
+    public LISTADOBLE lista_ruta;
+    
     public DATOLD(){
         this.id = 0;
+        this.lista_ruta = null;
     }
     public DATOLD(int id){
         this.id = id;
+        this.lista_ruta = null;
     }
 }
