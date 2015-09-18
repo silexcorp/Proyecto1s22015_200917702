@@ -4,6 +4,7 @@
     Author     : Alexander
 --%>
 
+<%@page import="struct.Arbolavl"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,6 +19,29 @@
         <a style="color:white; font-style:inherit ;">
             <p><h1 align="center">Bienvendio <%=session.getAttribute("user")%></h1>
         </a>
+        <form action="admin.jsp" method="POST">
+            <%-- start web service invocation --%><hr/>
+            <%
+            Arbolavl lista_admin = null;
+            try {
+                struct.STRUCTS_Service service = new struct.STRUCTS_Service();
+                struct.STRUCTS port = service.getSTRUCTSPort();
+                // TODO process result here
+                struct.Listadoble result = port.getAdmin();
+                out.println("Result = "+result);
+            } catch (Exception ex) {
+                // TODO handle custom exceptions here
+            }
+            
+            if(result.)
+            %>
+            <%-- end web service invocation --%><hr/>
+
+        </form>
+        
+        
+        
+        
         <div id="option"> 
                 <p>Logout</p> 
                 <a href="end.jsp">Logout?</a>

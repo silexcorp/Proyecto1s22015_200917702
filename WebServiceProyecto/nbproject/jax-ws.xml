@@ -4,9 +4,6 @@
     <service name="login">
       <implementation-class>login.login</implementation-class>
     </service>
-    <service name="STRUCTS">
-      <implementation-class>struct.STRUCTS</implementation-class>
-    </service>
   </services>
   <clients/>
 </jax-ws>

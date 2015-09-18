@@ -39,7 +39,7 @@ public class LISTADOBLE {
     public boolean estaVacio(){
         return this.ini == null;
     }
-    public LISTADOBLE insertar(DATOLD dato){
+    public LISTADOBLE insertar_desordenado(DATOLD dato){
         NODOLD nuevo;
         if(estaVacio()){
             nuevo = new NODOLD(dato);
@@ -47,31 +47,74 @@ public class LISTADOBLE {
             this.fin = nuevo;
             this.tam++;
         }else{
-            nuevo = new NODOLD(dato);
-            this.fin.sig = nuevo;
-            nuevo.ant = this.fin;
-            this.fin = nuevo;
-            this.tam++;
+        boolean estado = existe(dato);
+            if(!estado){
+                nuevo = new NODOLD(dato);
+                this.fin.sig = nuevo;
+                nuevo.ant = this.fin;
+                this.fin = nuevo;
+                this.tam++;
+            }
         }
         return this;
     }
-    /*public void insertar_lista(LISTADOBLE lista, DATOLD dato){
-        NODOLD nuevo;
-        if(lista == null){
-            nuevo = new NODOLD(dato);
-            lista.setIni(nuevo);
-            lista.setFin(nuevo);
-            lista.tam++;
-        }else{
-            nuevo = new NODOLD(dato);
-            nuevo.ant = lista.getFin();
-            lista.getFin().sig = nuevo;
-            lista.setFin(nuevo);
-            lista.tam++;
-        }
+    public boolean existe(DATOLD dato){
+        NODOLD aux;
+        aux = this.ini;
+        while(aux != this.fin){
+            if(aux.datos.id == dato.id){
+                //System.out.println(" DA DA");
+                return true;
+            }
+            aux = aux.sig;
+        }//System.out.println(" FALSE");
+        return false;
     }
-    */
-
+    public LISTADOBLE insertar(DATOLD dato){
+        NODOLD nuevo, aux = null, aux2 = null;
+        if(estaVacio()){
+            nuevo = new NODOLD(dato);
+            this.ini = nuevo;
+            this.fin = nuevo;
+            this.tam++;
+        }else{
+            aux = this.ini;
+            nuevo = new NODOLD(dato);
+            while(aux != null){
+                aux2 = aux.sig;
+                if(nuevo.datos.id == aux.datos.id){
+                    aux = aux.sig;
+                        break;
+                }else if(nuevo.datos.id < aux.datos.id){
+                    nuevo.sig = this.ini;
+                    this.ini = nuevo;
+                    this.tam++;
+                    break;
+                }else{
+                    if(nuevo.datos.id > aux.datos.id && aux2 == null){
+                        aux.sig = nuevo;
+                        nuevo.sig = null;
+                        this.tam++;
+                        break;
+                    }else{
+                        //El id que entra debe ir a la mitad
+                        if(aux.datos.id < nuevo.datos.id && aux2.datos.id > nuevo.datos.id){
+                            aux.sig = nuevo;
+                            nuevo.sig = aux2;
+                            this.tam++;
+                            return this;
+                        }else{
+                            aux = aux.sig;
+                        }                        
+                    }
+                }
+            }
+        }
+        return this;
+    }
+   
+    
+    
     public void eliminar(DATOLD dato){
         NODOLD temp = null, actual = this.ini;
         while(actual != this.fin){

@@ -11,14 +11,23 @@ package struct;
  */
 public class DATOLD {
     public int id;
-    public LISTADOBLE lista_ruta;
-    
+    public String id_alfa;
     public DATOLD(){
         this.id = 0;
-        this.lista_ruta = null;
     }
     public DATOLD(int id){
         this.id = id;
-        this.lista_ruta = null;
+    }
+    public DATOLD(String id){
+        this.id_alfa = id;
+        this.id = convertir(id);
+    }
+    private int convertir(String dato){
+        int longitud = 0;
+        for (int x = 0; x<dato.length(); x++){
+            System.out.println(dato.charAt(x) + " = " + dato.codePointAt(x));
+            longitud += (int)dato.codePointAt(x);
+        }
+        return longitud;
     }
 }

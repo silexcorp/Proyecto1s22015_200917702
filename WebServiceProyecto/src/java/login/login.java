@@ -5,6 +5,7 @@
  */
 package login;
 
+import struct.*;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -18,6 +19,14 @@ import javax.ejb.Stateless;
 @Stateless()
 public class login {
 
+    public DATOS datos_admin;
+    public DATOLD dato;
+    public login(){
+        datos_admin = new DATOS();
+        dato = new DATOLD();
+        //dato.
+        //datos_admin.lista_admin.insertar(null)
+    }
     /**
      * Web service operation
      */
