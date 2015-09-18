@@ -19,8 +19,8 @@
             <p><h1 align="center">Error></h1>
         </a>
         <div id="option"> 
-                <p>Logout</p> 
-                <a href="end.jsp">Logout?</a>
+                <p>Index</p> 
+                <a href="index.jsp">Go to index?</a>
         </div>
     </body>
 </html>

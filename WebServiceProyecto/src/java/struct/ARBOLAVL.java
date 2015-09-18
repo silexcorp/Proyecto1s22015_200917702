@@ -9,6 +9,56 @@ import java.io.IOException;
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
+        Random ran = new Random();
+        System.out.println("");
+        /*ARBOLAVL a = new ARBOLAVL();DATOAVL dats = new DATOAVL(3);
+        a.modificar(dats);
+        for(int i = 0; i< 4;i++){
+            int j = ran.nextInt(20) + 1;
+            System.out.print(" " + Integer.toString(j));
+            DATOAVL b = new DATOAVL(j);
+            a.insertar(b);
+        }
+        System.out.println("");
+        System.out.println("    NODO RAIZ: "+ Integer.toString(a.raizArbol().datos.id));
+        DATOAVL dat = new DATOAVL(3);
+        a.modificar(dat);
+        a.in_orden(a.raizArbol());
+        a.graficar_AVL(a.raizArbol());
+       
+        DATOAVL b = new DATOAVL(50);        a.insertar(b);
+        DATOAVL c = new DATOAVL(25);        a.insertar(c);
+        DATOAVL d = new DATOAVL(75);        a.insertar(d);
+        DATOAVL e = new DATOAVL(12);        a.insertar(e);
+        DATOAVL f = new DATOAVL(30);        a.insertar(f);
+        DATOAVL g = new DATOAVL(72);        a.insertar(g);
+        DATOAVL h = new DATOAVL(85);        a.insertar(h);
+        DATOAVL i = new DATOAVL(5);         a.insertar(i);
+        DATOAVL j = new DATOAVL(18);        a.insertar(j);
+        DATOAVL k = new DATOAVL(40);        a.insertar(k);
+        DATOAVL l = new DATOAVL(74);        a.insertar(l);
+        DATOAVL m = new DATOAVL(99);        a.insertar(m);
+        DATOAVL n = new DATOAVL(72);        a.insertar(n);
+        //System.out.println("    NODO RAIZ: "+ Integer.toString(a.raizArbol().datos.id));
+        //a.in_orden(a.raizArbol());
+        //a.graficar_AVL(a.raizArbol());
+        
+        
+        LISTADOBLE lista = new LISTADOBLE();
+        for(int h = 0; h < 9; h ++){
+            int j = ran.nextInt(30) + 1;
+            DATOLD a = new DATOLD(j);
+            lista.insertar(a);
+            //
+        }
+        DATOLD a = new DATOLD(11);
+        //lista.eliminar(a );
+        DATOLD nuevo = new DATOLD(3);
+        
+        lista.mostrar(lista);
+        
+        lista.editar(nuevo);
+        lista.graficar_lista(lista);
  */
 
 /**
@@ -170,6 +220,25 @@ public class ARBOLAVL {
         return raiz;        
     }
     
+    
+    public void modificar(DATOAVL dato){
+        modificarAVL(this.raiz,dato);
+    }
+    private void modificarAVL(NODOAVL raiz, DATOAVL dato){
+        if(raiz != null){
+            if(raiz.datos.id == dato.id){
+                raiz.datos = dato;
+                System.out.println("    Dato hallado: " + Integer.toString(raiz.datos.id));
+            }else if(raiz.datos.id < dato.id){
+                modificarAVL(raiz.der, dato);
+            }else{
+                modificarAVL(raiz.izq, dato);
+            } 
+        }else{
+             System.out.println(" NO EXISTE: " + Integer.toString(dato.id));
+        }
+        
+    }
     
     public void eliminar(DATOAVL dato){
         setEstado(false);
@@ -348,7 +417,7 @@ public class ARBOLAVL {
         escribirNodoB(bw,de);
     }
     
-      public static void escribirNodoA(BufferedWriter bw, NODOAVL nodo) throws IOException{
+    public static void escribirNodoA(BufferedWriter bw, NODOAVL nodo) throws IOException{
         if(nodo == null){return;}
         else{
           bw.write("\t\t"+Integer.toString(nodo.datos.id) + " [label = \"<der> | <dat> " + Integer.toString(nodo.datos.id) + " | <izq>\"];\r");
@@ -361,13 +430,13 @@ public class ARBOLAVL {
     }
     
     public void graficar_AVL(NODOAVL raiz) throws IOException{
-        String fileInputPath = "A:\\grafo_creado.dot";
+        String fileInputPath = "A:\\grafo_avl.dot";
         File archivo = new File(fileInputPath);
         BufferedWriter bw;
         if(archivo.exists() || !archivo.exists()) {
             bw = new BufferedWriter(new FileWriter(archivo));
             bw.write("");
-            bw.write("digraph ARBOLB{\r");
+            bw.write("digraph ARBOLAVL{\r");
             bw.write("\t/*Definicion atributos grafo en general*/ \r");
             bw.write("\tnode [shape = record];\r");
             bw.write("\t/*Definicion atributos generales nodos*/\r");
@@ -401,7 +470,7 @@ public class ARBOLAVL {
         try {
 
           String dotPath = "C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe";
-          String fileOutputPath = "A:\\grafo_creado.png";
+          String fileOutputPath = "A:\\grafo_avl.png";
           
           //dibujar(dotPath,fileOutputPath);
           
@@ -430,7 +499,7 @@ public class ARBOLAVL {
     
     public static void abrir() {
     //ruta del archivo en el pc
-    String file = new String("A:\\grafo_creado.png"); 
+    String file = new String("A:\\grafo_avl.png"); 
         try{ 
         //definiendo la ruta en la propiedad file
         Runtime.getRuntime().exec("cmd /c start "+file);
