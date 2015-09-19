@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package struct;
+package modelo;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -70,8 +70,21 @@ public class LISTADOBLE {
         }//System.out.println(" FALSE");
         return false;
     }
+    
+    private int convertir(String dato){
+        int longitud = 0;
+        for (int x = 0; x<dato.length(); x++){
+            System.out.println(dato.charAt(x) + " = " + dato.codePointAt(x));
+            longitud += (int)dato.codePointAt(x);
+        }
+        return longitud;
+    }
+    
     public LISTADOBLE insertar(DATOLD dato){
         NODOLD nuevo, aux = null, aux2 = null;
+        if(dato.bus_id != null){
+            dato.id = convertir(dato.bus_id);
+        }
         if(estaVacio()){
             nuevo = new NODOLD(dato);
             this.ini = nuevo;

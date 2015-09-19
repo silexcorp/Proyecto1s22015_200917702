@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
-    <system systemId="http://localhost:8080/login/login?wsdl" uri="src/conf/xml-resources/web-service-references/login/wsdl/localhost_8080/login/login.wsdl"/>
-    <system systemId="http://localhost:8080/login/login?xsd=1" uri="src/conf/xml-resources/web-service-references/login/wsdl/localhost_8080/login/login.xsd_1.xsd"/>
-    <system systemId="http://localhost:8080/STRUCTS/STRUCTS?wsdl" uri="src/conf/xml-resources/web-service-references/STRUCTS/wsdl/localhost_8080/STRUCTS/STRUCTS.wsdl"/>
-    <system systemId="http://localhost:8080/STRUCTS/STRUCTS?xsd=1" uri="src/conf/xml-resources/web-service-references/STRUCTS/wsdl/localhost_8080/STRUCTS/STRUCTS.xsd_1.xsd"/>
-</catalog>

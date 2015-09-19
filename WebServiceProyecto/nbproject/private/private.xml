@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/A:/Alexander/ProyectosNetBeans/ProyectoFinal/WebServiceProyecto/src/java/struct/ARBOLAVL.java</file>
-            <file>file:/A:/Alexander/ProyectosNetBeans/ProyectoFinal/WebServiceProyecto/src/java/struct/STRUCTS.java</file>
-            <file>file:/A:/Alexander/ProyectosNetBeans/ProyectoFinal/WebServiceProyecto/src/java/login/login.java</file>
-            <file>file:/A:/Alexander/ProyectosNetBeans/ProyectoFinal/WebServiceProyecto/src/java/struct/LISTADOBLE.java</file>
+            <file>file:/A:/Alexander/ProyectosNetBeans/ProyectoFinal/WebServiceProyecto/src/java/modelo/ARBOLAVL.java</file>
+            <file>file:/A:/Alexander/ProyectosNetBeans/ProyectoFinal/WebServiceProyecto/web/index.html</file>
+            <file>file:/A:/Alexander/ProyectosNetBeans/ProyectoFinal/WebServiceProyecto/src/java/wservice/WSGUsuario.java</file>
+            <file>file:/A:/Alexander/ProyectosNetBeans/ProyectoFinal/WebServiceProyecto/src/java/modelo/RegistrarUsuario.java</file>
         </group>
     </open-files>
 </project-private>

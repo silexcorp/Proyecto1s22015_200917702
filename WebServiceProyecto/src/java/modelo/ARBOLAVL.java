@@ -1,4 +1,4 @@
-package struct;
+package modelo;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -66,19 +66,19 @@ import java.io.IOException;
  * @author Alexander
  */
 public class ARBOLAVL {
-    private NODOAVL raiz;
-    private boolean estado;
+    public static NODOAVL raiz;
+    public static boolean estado;
     
     public ARBOLAVL(){
         this.raiz = null;
         this.estado = false;
     }
     
-    public NODOAVL raizArbol(){return this.raiz;}
-    public void setEstado(boolean b){this.estado = b;}
-    public boolean getEstado(){ return this.estado;}
+    public static NODOAVL raizArbol(){return raiz;}
+    public static void setEstado(boolean b){ARBOLAVL.estado = b;}
+    public static boolean getEstado(){ return ARBOLAVL.estado;}
     
-    private NODOAVL rotacionII(NODOAVL nodo, NODOAVL nodo2){
+    private static NODOAVL rotacionII(NODOAVL nodo, NODOAVL nodo2){
         nodo.ramaIzq(nodo2.subarbolDer());
         nodo2.ramaDer(nodo);
         /* Actualización del FE */
@@ -92,7 +92,7 @@ public class ARBOLAVL {
         return nodo2;
     }
 
-    private NODOAVL rotacionDD(NODOAVL nodo, NODOAVL nodo2){
+    private static NODOAVL rotacionDD(NODOAVL nodo, NODOAVL nodo2){
         nodo.ramaDer(nodo2.subarbolIzq());
         nodo2.ramaIzq(nodo);
         /* Actualización del FE */
@@ -106,7 +106,7 @@ public class ARBOLAVL {
         return nodo2;
     }
 
-    private NODOAVL rotacionID(NODOAVL nodo, NODOAVL nodo2){
+    private static NODOAVL rotacionID(NODOAVL nodo, NODOAVL nodo2){
         NODOAVL nodo3;
         nodo3 = (NODOAVL)nodo2.subarbolDer();
         nodo.ramaIzq(nodo3.subarbolDer());
@@ -128,7 +128,7 @@ public class ARBOLAVL {
         return nodo3;
     }
     
-    private NODOAVL rotacionDI(NODOAVL nodo, NODOAVL nodo2){
+    private static NODOAVL rotacionDI(NODOAVL nodo, NODOAVL nodo2){
         NODOAVL nodo3;
         nodo3 = (NODOAVL)nodo2.subarbolIzq();
         nodo.ramaDer(nodo3.subarbolIzq());
@@ -150,15 +150,36 @@ public class ARBOLAVL {
         return nodo3;
     }
     
-    public void insertar(DATOAVL dato){
+    private static int convertir(String dato){
+        int longitud = 0;
+        for (int x = 0; x<dato.length(); x++){
+            System.out.println(dato.charAt(x) + " = " + dato.codePointAt(x));
+            longitud += (int)dato.codePointAt(x);
+        }
+        return longitud;
+    }
+    
+    public static String insertar(DATOAVL dato){
+        if(dato.admin_id != null){
+            dato.id = convertir(dato.admin_id);
+        }else if(dato.est_clave_id != null){
+            dato.id = convertir(dato.est_clave_id);
+        }else if(dato.est_gene_id != null){
+            dato.id = convertir(dato.est_gene_id);
+        }else if(dato.chofer_id != null){
+            dato.id = convertir(dato.chofer_id);
+        }
         NODOAVL aux = insertarAVL(raiz, dato, estado);
         setEstado(false);
         if(aux != null){
             raiz = aux;
+            return "INSERTADO";
+        }else{
+            return "ERROR AL INSERTAR";
         }
     }
 
-    private NODOAVL insertarAVL(NODOAVL raiz, DATOAVL dato, boolean estado){
+    private static NODOAVL insertarAVL(NODOAVL raiz, DATOAVL dato, boolean estado){
         NODOAVL nodo;
         if(raiz == null){
             raiz = new NODOAVL(dato);
@@ -221,10 +242,10 @@ public class ARBOLAVL {
     }
     
     
-    public void modificar(DATOAVL dato){
-        modificarAVL(this.raiz,dato);
+    public static void modificar(DATOAVL dato){
+        modificarAVL(ARBOLAVL.raiz,dato);
     }
-    private void modificarAVL(NODOAVL raiz, DATOAVL dato){
+    private static void modificarAVL(NODOAVL raiz, DATOAVL dato){
         if(raiz != null){
             if(raiz.datos.id == dato.id){
                 raiz.datos = dato;
@@ -237,15 +258,49 @@ public class ARBOLAVL {
         }else{
              System.out.println(" NO EXISTE: " + Integer.toString(dato.id));
         }
-        
+    }
+      
+ /* Buscar en AVL */
+    public static String buscar(DATOAVL dato){
+        if(dato.admin_id != null){
+            dato.id = convertir(dato.admin_id);
+        }else if(dato.est_clave_id != null){
+            dato.id = convertir(dato.est_clave_id);
+        }else if(dato.est_gene_id != null){
+            dato.id = convertir(dato.est_gene_id);
+        }else if(dato.chofer_id != null){
+            dato.id = convertir(dato.chofer_id);
+        }
+        return buscarAVL(raiz,dato);
+    }
+    private static String buscarAVL(NODOAVL raiz, DATOAVL dato){
+        NODOAVL reco = raiz;
+        while (reco != null) {
+            if (dato.id == reco.datos.id){
+                if(raiz.datos.admin_contrasenia.equals(dato.admin_contrasenia)){
+                    return "Si :D)";
+                }else if(raiz.datos.chofer_contrasenia.equals(dato.chofer_contrasenia)){
+                    return "Si :D)";
+                }else if(raiz.datos.est_clave_contrasenia.equals(dato.est_clave_contrasenia)){
+                    return "Si :D)";
+                }else if(raiz.datos.est_gene_contrasenia.equals(dato.est_gene_contrasenia)){
+                    return "Si :D)";
+                }
+            } else if (dato.id > reco.datos.id) {
+                reco = reco.der;
+            } else {
+                reco = reco.izq;
+            }
+        }
+        return "NO :(";
     }
     
-    public void eliminar(DATOAVL dato){
+    public static void eliminar(DATOAVL dato){
         setEstado(false);
         raiz = borrarAVL(raiz, dato, estado);
     }
     
-    private NODOAVL borrarAVL(NODOAVL nodo, DATOAVL dato, boolean estado){
+    private static NODOAVL borrarAVL(NODOAVL nodo, DATOAVL dato, boolean estado){
         if(nodo == null){
             System.out.println("NODO NO ENCONTRADO");
         }else if(dato.id < nodo.valorNodo().id){
@@ -288,7 +343,7 @@ public class ARBOLAVL {
     }
     
     
-    private NODOAVL reemplazar(NODOAVL nodo, NODOAVL actual, boolean estado){
+    private static NODOAVL reemplazar(NODOAVL nodo, NODOAVL actual, boolean estado){
         if(actual.subarbolDer() != null){
             NODOAVL der;
             der = reemplazar(nodo, (NODOAVL)actual.subarbolDer(), estado);
@@ -307,7 +362,7 @@ public class ARBOLAVL {
     }
     
     
-    private NODOAVL equilibrarA(NODOAVL nodo, boolean estado) {
+    private static NODOAVL equilibrarA(NODOAVL nodo, boolean estado) {
         NODOAVL aux;
         switch(nodo.fe){
             case -1:
@@ -330,7 +385,7 @@ public class ARBOLAVL {
         return nodo;
     }
     
-    private NODOAVL equilibrarB(NODOAVL nodo, boolean estado) {
+    private static NODOAVL equilibrarB(NODOAVL nodo, boolean estado) {
         NODOAVL aux;
         switch(nodo.fe){
             case -1:
@@ -373,7 +428,18 @@ public class ARBOLAVL {
             in_orden(raiz.der);
         }
     }
-    
+    public static String ddd = "";
+    public static String mostrar_datos(NODOAVL raiz){
+        
+        if(raiz == null){
+        }else{
+            mostrar_datos(raiz.izq);
+            ddd = ddd + raiz.datos.admin_id + ",";
+            mostrar_datos(raiz.der);
+        }
+        return ddd;
+        
+    }
 
     
     
@@ -429,7 +495,7 @@ public class ARBOLAVL {
         escribirNodoA(bw,de);
     }
     
-    public void graficar_AVL(NODOAVL raiz) throws IOException{
+    public static void graficar_AVL(NODOAVL raiz) throws IOException{
         String fileInputPath = "A:\\grafo_avl.dot";
         File archivo = new File(fileInputPath);
         BufferedWriter bw;
